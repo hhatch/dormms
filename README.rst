@@ -16,8 +16,19 @@ Select results are further documented and displayed graphically as part of GORMM
 
    Code Repository: https://github.com/usnistgov/gormms
 
+Installation
+==============
+
+.. code-block:: bash
+
+    pip install dormms
+
+
 Workflow for adding new results
 ====================================
+
+Each model is placed in the src/dormms/ directory.
+And each method is placed in a new directory therein, where the final post processing step should result in a single data.json file that will be imported by the Python module.
 
 The scripts have the following requirements:
 
@@ -31,6 +42,9 @@ The scripts have the following requirements:
 * Verify results are reproduced by another researcher.
 * Do not add large data files or external software to the repository.
 * Temporary files are ones that are not added to the repository as final results.
+
+After the data.json is created, then a [method].py file is created that matches the name of the data directory.
+For example, src/dormms/lennard_jones.py imports src/dormms/lennard_jones/data.json.
 
 .. include:: DISCLAIMER.rst
 
