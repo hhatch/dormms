@@ -2,7 +2,11 @@
 syntax: glob
 
 build
+feasst*
 *.xyz
+tmp*
 launch.cmd
+*.swp
 
-software/feasstv0.25.1
+__pycache__
+*egg-info
