@@ -27,9 +27,10 @@ The scripts have the following requirements:
 * Script output is recorded as "bash script.sh > script.sh.log 2>&1" or "python script.py > script.py.log 2>&1" (even if the output is empty).
 * Usernames in log and output files are replaced with "user".
 * Include assert checks for expected results.
+* Package all data into a dictionary and write to file in JSON format as data.json.
 * Verify results are reproduced by another researcher.
 * Do not add large data files or external software to the repository.
-* Temporary files are ones that are not added to the repository as final results. All temporary file names should begin with the characters "tmp".
+* Temporary files are ones that are not added to the repository as final results.
 
 .. include:: DISCLAIMER.rst
 

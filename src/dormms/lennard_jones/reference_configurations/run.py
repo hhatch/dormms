@@ -1,4 +1,5 @@
 import sys
+import json
 import subprocess
 import unittest
 import numpy as np
@@ -19,7 +20,7 @@ Run num_trials 1
     syscode = subprocess.call("feasstv0.25.1/build/bin/fst < tmp_launch0.txt > tmp_launch0.log", shell=True, executable='/bin/bash')
     if syscode > 0: sys.exit(1)
 
-def srsw_ref_config4():
+def srsw_ref_config4(data):
     """Test the LJ potential against a configuration of 30 particles.
     In particular, the 4th configuration of the LJ SRSW reference:
     https://www.nist.gov/mml/csd/chemical-informatics-research-group/lennard-jones-fluid-reference-calculations
@@ -35,6 +36,8 @@ def srsw_ref_config4():
     assert np.abs(enlj - df['LennardJones'][0]) < 1e-10
     assert np.abs(enlrc - df['LongRangeCorrections'][0]) < 1e-10
     assert np.abs(enlj + enlrc - df['energy'][0]) < 1e-10
+    data['cubic4'] = {'N': 30, 'L': 8, 'U_lj': df['LennardJones'][0], 'U_lrc': df['LongRangeCorrections'][0],
+        'U_total': df['LennardJones'][0]+df['LongRangeCorrections'][0]}
 
 def srsw_ref_config_triclinic3():
     """Test the LJ potential against a configuration of 300 particles in a trinclinic cell.
@@ -56,5 +59,8 @@ def srsw_ref_config_triclinic3():
     assert np.abs(enlj + enlrc - df['energy'][0]) < 1e-10
 
 if __name__ == '__main__':
-    srsw_ref_config4()
+    data = dict()
+    srsw_ref_config4(data)
     srsw_ref_config_triclinic3()
+    with open('data.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2)
