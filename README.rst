@@ -23,6 +23,7 @@ The scripts have the following requirements:
 
 * File names begin with a number that corresponds with the order of running the scripts.
 * BASH or Python extensions of .sh or .py, respectively.
+* Before install, deactivate any Python virtual environments. The install should include all Python dependencies.
 * Script output is recorded as "bash script.sh > script.sh.log 2>&1" or "python script.py > script.py.log 2>&1" (even if the output is empty).
 * Usernames in log and output files are replaced with "user".
 * Include assert checks for expected results.

@@ -25,7 +25,7 @@ def srsw_ref_config4():
     https://www.nist.gov/mml/csd/chemical-informatics-research-group/lennard-jones-fluid-reference-calculations
     """
     params = {"config_params": "cubic_side_length 8 particle_type0 /feasst/particle/lj.fstprt \
-            xyz_file /feasst/plugin/configuration/test/data/lj_sample_config_periodic4.xyz",
+            xyz_file lj_sample_config_periodic4.xyz",
            "output_file": "srsw_ref_config4.csv"}
     run_fst(params)
     df = pd.read_csv(params['output_file'])
@@ -44,7 +44,7 @@ def srsw_ref_config_triclinic3():
     params = {"config_params": "side_length0 10.0 side_length1 9.84807753012208 side_length2 9.64974312607518 \
         xy 1.7364817766693041 xz 2.5881904510252074 yz 0.42863479791864567 \
         particle_type0 /feasst/particle/lj.fstprt \
-        xyz_file /feasst/plugin/configuration/test/data/lj_triclinic_sample_config_periodic3.xyz",
+        xyz_file lj_triclinic_sample_config_periodic3.xyz",
         "output_file": "srsw_ref_config_triclinic3.csv"}
     run_fst(params)
     df = pd.read_csv(params['output_file'])
