@@ -3,16 +3,8 @@ DORMMS - Database of Reproducible Models and Molecular Simulations
 ******************************************************************************************
 
 DORMMS contains model and molecular simulation results from open-source software that are reproducible.
-
-All software installation instructions can be found in the software directory.
-Each specific version of software used to generate the results has an accompanying BASH script named [software][version]_install.sh.
-
-All results are organized by model in the models directory.
-Within each model, the results are then organized by technique.
-Each result must have a run.sh BASH script that generates the results using the specific software.
-The results may also be analyzed with a post_process.sh BASH script.
-
-Select results are further documented and displayed graphically as part of the GORMMS (Graphics of Reproducible Models and Molecular Simulations) project.
+All results are organized by model and then technique and contain the BASH or Python scripts necessary to install, run and analyze the software.
+Select results are further documented and displayed graphically as part of GORMMS (Graphics of Reproducible Models and Molecular Simulations).
 
 .. note::
 
@@ -23,6 +15,20 @@ Select results are further documented and displayed graphically as part of the G
    Website: https://pages.nist.gov/gormms
 
    Code Repository: https://github.com/usnistgov/gormms
+
+Workflow for adding new results
+====================================
+
+The scripts have the following requirements:
+
+* File names begin with a number that corresponds with the order of running the scripts.
+* BASH or Python extensions of .sh or .py, respectively.
+* Script output is recorded as "bash script.sh > script.sh.log 2>&1" or "python script.py > script.py.log 2>&1".
+* Usernames in log and output files are replaced with user.
+* Include assert checks for expected results.
+* Verify results are reproduced by another researcher.
+* Do not add large data files or external software to the repository.
+* Temporary files are ones that are not added to the repository as final results. All temporary file names should begin with the characters "tmp".
 
 .. include:: DISCLAIMER.rst
 

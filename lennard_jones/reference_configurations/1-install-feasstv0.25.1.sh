@@ -8,7 +8,7 @@ for version in v0.25.1; do
     mkdir build
     pushd build
       cmake ..
-      make -j24 install
+      make -j8 install
     popd
   popd
 done
