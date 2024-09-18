@@ -6,3 +6,6 @@ feasst*
 *.xyz
 tmp*
 launch.cmd
+
+__pycache__
+*egg-info
