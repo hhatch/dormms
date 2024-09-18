@@ -1,0 +1,8 @@
+#use glob syntax
+syntax: glob
+
+build
+*.xyz
+launch.cmd
+
+software/feasstv0.25.1
