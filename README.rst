@@ -1,10 +1,10 @@
 ******************************************************************************************
-DORMMS - Database of Reproducible Models and Molecular Simulations
+DORMMS - Data Of Reproducible Models and Molecular Simulations
 ******************************************************************************************
 
 DORMMS contains model and molecular simulation results from open-source software that are reproducible.
 All results are organized by model and then technique and contain the BASH or Python scripts necessary to install, run and analyze the software.
-Select results are further documented and displayed graphically as part of GORMMS (Graphics of Reproducible Models and Molecular Simulations).
+Select results are further documented and displayed graphically as part of GORMMS (Graphical Overview of Reproducible Models and Molecular Simulations).
 
 .. note::
 
@@ -45,6 +45,7 @@ The scripts have the following requirements:
 
 After the data.json is created, then a [method].py file is created that matches the name of the data directory.
 For example, src/dormms/lennard_jones.py imports src/dormms/lennard_jones/data.json.
+Include the data.json file in MANIFEST.in
 
 .. include:: DISCLAIMER.rst
 

@@ -1,1 +1,2 @@
 include src/dormms/lennard_jones/reference_configurations/data.json
+include src/dormms/lennard_jones/canonical_monte_carlo/data.json
