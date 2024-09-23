@@ -95,32 +95,33 @@ RemoveAnalyze name Log
 Metropolis num_trials_per_iteration {trials_per_iteration} num_iterations_to_complete {production_iterations}
 Log trials_per_write {trials_per_iteration} output_file {prefix}{sim}.csv
 Energy trials_per_write {trials_per_iteration} output_file {prefix}{sim}_en.csv
+PressureFromTestVolume trials_per_update 1e3 trials_per_write {trials_per_iteration} output_file {prefix}{sim}_pres.csv
 Run until_criteria_complete true
 """.format(**params))
 
 def post_process(params):
-    """ Plot energy and compare with https://mmlapps.nist.gov/srs/LJ_PURE/mc.htm """
+    """ Summary ensemble average energy and block standard deviations """
     ens = np.zeros(shape=(params['num_sims'], 2))
     for sim in range(params['num_sims']):
-        log = pd.read_csv(params['prefix']+str(sim)+'.csv')
-        assert int(log['num_particles_of_type0'][0]) == params['num_particles']
         energy = pd.read_csv(params['prefix']+str(sim)+'_en.csv')
         ens[sim] = np.array([energy['average'][0],
                              energy['block_stdev'][0]])/params['num_particles']
-    # data from https://mmlapps.nist.gov/srs/LJ_PURE/mc.htm
-    rhos_srsw = [0.001, 0.003, 0.005, 0.007, 0.009]
-    ens_srsw = [-9.9165E-03, -2.9787E-02, -4.9771E-02, -6.9805E-02, -8.9936E-02]
-    en_stds_srsw = [1.89E-05, 3.21E-05, 3.80E-05, 7.66E-05, 2.44E-05]
-    plt.errorbar(rhos_srsw, ens_srsw, en_stds_srsw, fmt='+', label='SRSW')
-    plt.errorbar(params['densities'], ens[:, 0], ens[:, 1], fmt='x', label='FEASST')
-    plt.xlabel(r'$\rho$', fontsize=16)
-    plt.ylabel(r'$U/N$', fontsize=16)
-    plt.legend(fontsize=16)
-    #plt.savefig(params['prefix']+'_energy.png', bbox_inches='tight', transparent='True')
-    if len(rhos_srsw) == params['num_sims']: # compare with srsw exactly
-        for sim in range(params['num_sims']):
-            diff = ens[sim][0] - ens_srsw[sim]
-            assert np.abs(diff) < 10*np.sqrt(ens[sim][1]**2 + en_stds_srsw[sim]**2)
+    print(ens)
+    data = {
+        'number_particles': params['num_particles'],
+        'number_simulations': params['num_sims'],
+        'units': {'length': 'Lennard-Jones diameter (sigma)', 'energy': 'Lennard-Jones well depth (epsilon)'},
+        'equilibration_trials': params['trials_per_iteration']*params['equilibration_iterations'],
+        'production_trials': params['trials_per_iteration']*params['production_iterations'],
+        'interaction_cutoff': 3,
+        'temperature': params['temperatures'],
+        'density': params['densities'],
+        'energy_total': ens[:, 0].tolist(),
+        'energy_total_blockstdev': ens[:, 1].tolist(),
+    }
+    print(data)
+    with open('data.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2)
 
 if __name__ == '__main__':
     fstio.run_simulations(params=PARAMS,
