@@ -3,7 +3,7 @@ DORMMS - Data Of Reproducible Models and Molecular Simulations
 ******************************************************************************************
 
 DORMMS contains model and molecular simulation results from open-source software that are reproducible.
-All results are organized by model and then technique and contain the BASH or Python scripts necessary to install, run and analyze the software.
+All results are organized by model and then method, and contain the BASH or Python scripts necessary to install, run and analyze the software.
 Select results are further documented and displayed graphically as part of GORMMS (Graphical Overview of Reproducible Models and Molecular Simulations).
 
 .. note::
