@@ -17,7 +17,7 @@ Metropolis
 Log output_file {output_file} max_precision true clear_file true
 Run num_trials 1
 """.format(**params))
-    syscode = subprocess.call("feasstv0.25.1/build/bin/fst < tmp_launch0.txt > tmp_launch0.log", shell=True, executable='/bin/bash')
+    syscode = subprocess.call("feasst-v0.25.3/build/bin/fst < tmp_launch0.txt > tmp_launch0.log", shell=True, executable='/bin/bash')
     if syscode > 0: sys.exit(1)
 
 def srsw_ref_config4(data):

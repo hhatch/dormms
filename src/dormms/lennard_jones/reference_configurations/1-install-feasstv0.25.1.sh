@@ -9,16 +9,12 @@ python3 -m venv feasst_env
 source feasst_env/bin/activate
 python3 -m pip install --upgrade pip
 pip install numpy pandas
-version=v0.25.1
+version=v0.25.3
 printf "********\ninstall feasst version $version\n********\n"
-git clone https://github.com/usnistgov/feasst feasst$version
-pushd feasst$version
-  git checkout $version
-  mkdir build
-  pushd build
-    cmake ..
-    make -j8 install
-    pip install ../pyfeasst
-  popd
+wget https://github.com/usnistgov/feasst/archive/refs/tags/${version}.tar.gz
+tar -xf ${version}.tar.gz --transform s/-/-v/
+mkdir feasst-${version}/build; pushd $_
+  cmake ..
+  make install -j$(nproc)
+  pip install ../pyfeasst
 popd
-
